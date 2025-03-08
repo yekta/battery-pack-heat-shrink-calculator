@@ -152,7 +152,7 @@ export function BatteryScene(props: BatterySceneProps) {
 
       {/* <axesHelper args={[100]} /> */}
       <BatteryGroup {...props} />
-      <OrbitControls />
+      <OrbitControls minDistance={100} maxDistance={600} />
       <gridHelper args={[100000, 5000]} />
     </Canvas>
   );
