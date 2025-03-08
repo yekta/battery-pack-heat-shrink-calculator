@@ -11,23 +11,15 @@ import { Slider } from "@/components/ui/slider";
 import { ShellIcon } from "lucide-react";
 import { useState } from "react";
 import { BatteryScene } from "./components/BatteryScene";
-
-type BatteryType = "18650" | "21700";
-
-type BatteryDimensions = {
-  "18650": { diameter: number; length: number };
-  "21700": { diameter: number; length: number };
-};
-
-const BATTERY_DIMENSIONS: BatteryDimensions = {
-  "18650": { diameter: 18, length: 65 },
-  "21700": { diameter: 21, length: 70 },
-};
-
-type Orientation = "x" | "y" | "z";
+import {
+  BATTERY_DIMENSIONS,
+  TBatteryDimensions,
+  TBatteryType,
+  TOrientation,
+} from "@/lib/constants";
 
 function App() {
-  const [batteryType, setBatteryType] = useState<BatteryType>("18650");
+  const [batteryType, setBatteryType] = useState<TBatteryType>("18650");
   const [rows, setRows] = useState(2);
   const [columns, setColumns] = useState(3);
   const [shrinkFactor, setShrinkFactor] = useState(0.5);
@@ -62,7 +54,7 @@ function App() {
   // Find orientation with smallest diameter
   const orientationKey = Object.entries(surfaceArea).reduce((a, b) =>
     a[1].area < b[1].area ? a : b
-  )[0] as Orientation;
+  )[0] as TOrientation;
 
   const tubeDiameter = getEnclosingCircleDiameter(
     rows,
@@ -93,7 +85,7 @@ function App() {
                 <Label>Battery Type</Label>
                 <Select
                   value={batteryType}
-                  onValueChange={(value: BatteryType) => setBatteryType(value)}
+                  onValueChange={(value: TBatteryType) => setBatteryType(value)}
                 >
                   <SelectTrigger>
                     <SelectValue />
@@ -190,8 +182,8 @@ function App() {
 function getEnclosingCircleDiameter(
   rows: number,
   columns: number,
-  battery: BatteryDimensions[keyof BatteryDimensions],
-  orientation: Orientation
+  battery: TBatteryDimensions[keyof TBatteryDimensions],
+  orientation: TOrientation
 ): number {
   if (orientation === "x") {
     const triangleSide1 = (battery.diameter * rows) / 2;

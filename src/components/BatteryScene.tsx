@@ -1,3 +1,4 @@
+import Battery from "@/components/Battery";
 import { Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 
@@ -40,30 +41,7 @@ function BatteryGroup({
       const y = (row - (rows - 1) / 2) * battery.diameter;
 
       batteries.push(
-        <group
-          key={`${row}-${col}`}
-          position={[x, y, 0]}
-          rotation={[Math.PI / 2, 0, 0]}
-        >
-          <mesh>
-            <cylinderGeometry
-              args={[
-                battery.diameter / 2,
-                battery.diameter / 2,
-                battery.length,
-                32,
-                8,
-                false,
-              ]}
-            />
-            <meshStandardMaterial
-              color="#4ade80"
-              metalness={0.4}
-              roughness={0.2}
-              envMapIntensity={1}
-            />
-          </mesh>
-        </group>
+        <Battery key={`${row}-${col}`} battery={battery} x={x} y={y} />
       );
     }
   }
