@@ -127,7 +127,7 @@ function BatteryGroup({
 export function BatteryScene(props: BatterySceneProps) {
   return (
     <Canvas
-      camera={{ position: [150, 150, 150], fov: 45 }}
+      camera={{ position: [150, 75, 200], fov: 45 }}
       style={{ background: "transparent" }}
       shadows
     >
